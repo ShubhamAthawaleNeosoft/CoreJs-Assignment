@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="keyword" content="put imp words from ur webpage">
+    <meta name="author" content="put name of author">
+    <meta name="description" content="put short description">
+    <meta name="viewpoint" content="width=device-width,initial-scale=1">
+    <title>
+        Form validation
+    </title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <form action="sucess.html" onsubmit="return validateForm() " novalidate>
+        <table>
+            <tr>
+                <td><label>Full Name:</label></td>
+                <td><input id="fname" type="text" name="fname" onblur="validation1()" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="error" id="error1"></td>
+            </tr>
+            <tr>
+                <td><label>User Name:</label></td>
+                <td><input id="uname" type="text" name="uname" onblur="validation2()" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="error" id="error2"></td>
+            </tr>
+            <tr>
+                <td><label>Password:</label></td>
+                <td><input id="pass" type="password" name="pass" onblur="validation3()" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="error" id="error3"></td>
+            </tr>
+            <tr>
+                <td><label>Email Id:</label></td>
+                <td><input id="email" type="email" name="email" onblur="validation4()" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="error" id="error4"></td>
+            </tr>
+            <tr>
+                <td><label>Mobile No:</label></td>
+                <td><input id="mobileno" type="text" name="mobileno" onblur="validation5()" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="error" id="error5"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        let green_border = "2px solid green"
+        let red_border = "2px solid red"
+        
+        function validation1() {
+            errorNode1 = document.getElementById("error1");
+            fnameNode = document.getElementById("fname");
+            errorNode1.textContent = "";
+            fullname = fnameNode.value;
+            regExp = new RegExp("^[A-Za-z]*$");
+            console.log(regExp.test(fullname));
+            if (fullname == '') {
+                errorNode1.textContent = "This field is required";
+                fnameNode.style.border = red_border;
+                return false;
+            }
+            else if (regExp.test(fullname) == false) {
+                errorNode1.textContent = "name should have only charecter";
+                fnameNode.style.border = red_border;
+                return false;
+            }
+            else {
+                fnameNode.style.border = green_border;
+                return true;
+            }
+        }
+        function validation2() {
+            errorNode2 = document.getElementById("error2");
+            unameNode = document.getElementById("uname");
+            errorNode2.textContent = "";
+            uname = unameNode.value;
+            regExp = new RegExp("^[A-Za-z]*$");
+            console.log(regExp.test(uname));
+            if (uname == '') {
+                errorNode2.textContent = "This field is required";
+                unameNode.style.border = red_border;
+                return false;
+            }
+            else if (uname.length < 3 || uname.length > 10) {
+                errorNode2.textContent = "uname must have atlest 3 at most 10 chars";
+                unameNode.style.border = red_border;
+                return false;
+            }
+            else {
+                unameNode.style.border = green_border;
+                return true;
+            }
+        }
+        function validation3() {
+            errorNode3 = document.getElementById("error3");
+            passNode = document.getElementById("pass");
+            errorNode3.textContent = "";
+            pass = passNode.value;
+            regExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])");
+            console.log(regExp.test(pass));
+            if (pass == '') {
+                errorNode3.textContent = "This field is required";
+                passNode.style.border = red_border;
+                return false;
+            }
+            else if (regExp.test(pass) == false) {
+                let spanNode = document.createElement("span");
+                spanNode.textContent = "the pass should contain at least one";
+                let ulNode = document.createElement("ul");
+                let liNode1 = document.createElement("li");
+                liNode1.textContent = "Small letter";
+                let liNode2 = document.createElement("li");
+                liNode2.textContent = "Capital letter";
+                let liNode3 = document.createElement("li");
+                liNode3.textContent = "One symbol";
+                let liNode4 = document.createElement("li");
+                liNode4.textContent = "One number";
+                ulNode.append(liNode1, liNode2, liNode3, liNode4);
+                errorNode3.append(spanNode, ulNode);
+                passnode.style.border = red_border;
+                return false;
+            }
+            else if (pass.length < 5 || pass.length > 12) {
+                errorNode3.textContent = "password should be atleast 5 & atmost 12 chars";
+                passNode.style.border = red_border;
+                return false;
+            }
+            else {
+                passNode.style.border = green_border;
+                return true;
+            }
+        }
+        function validation4() {
+            errorNode4 = document.getElementById("error4");
+            emailNode = document.getElementById("email");
+            errorNode4.textContent = "";
+            email = emailNode.value;
+            let ss = email.substring(email.indexOf('@') + 1);
+            console.log(regExp.test(email));
+            if (email == '') {
+                errorNode4.textContent = "This field is required";
+                emailNode.style.border = red_border;
+                return false;
+            }
+            else if (!email.includes('@') || ss == '') {
+                errorNode4.textContent = "Please put valid email id";
+                emailNode.style.border = red_border;
+                return false;
+            }
+            else {
+                emailNode.style.border = green_border;
+                return true;
+            }
+        }
+        function validation5() {
+            errorNode5 = document.getElementById("error5");
+            mobilenoNode = document.getElementById("mobileno");
+            errorNode5.textContent = "";
+            mobileno = mobilenoNode.value;
+            regExp = new RegExp("^[0-9]*$");
+            console.log(regExp.test(mobileno));
+            if (mobileno == '') {
+                errorNode5.textContent = "This field is required";
+                mobilenoNode.style.border = red_border;
+                return false;
+            }
+            else if (regExp.test(mobileno) == false) {
+                errorNode5.textContent = "Mobile no only contains digit";
+                mobilenoNode.style.border = red_border;
+                return false;
+            }
+            else if (mobileno.length != 10) {
+                errorNode5.textContent = "plese enter valid mobile no";
+                mobilenonode.style.border = red_border;
+                return false;
+            }
+            else {
+                mobilenoNode.style.border = green_border;
+                return true;
+            }
+        }
+        function validateForm() {
+            let st1 = validation1();
+            let st2 = validation2();
+            let st3 = validation3();
+            let st4 = validation4();
+            let st5 = validation5();
+            return st1 && st2 && st3 && st4 && st5;
+        }
+       
+    </script>
+</body>
+
+</html>

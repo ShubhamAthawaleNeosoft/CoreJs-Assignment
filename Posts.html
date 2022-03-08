@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="keyword" content="put imp words from ur webpage">
+    <meta name="author" content="put name of author">
+    <meta name="description" content="put short description">
+    <meta name="viewpoint" content="width=device-width,initial-scale=1">
+    <title>
+        Posts
+    </title>
+</head>
+
+<body>
+    <h2> Latest Posts </h2>
+    <button onclick="abc()"> Get Posts </button>
+    <ul id="target">
+
+    </ul>
+
+    <script>
+        const URL = "https://jsonplaceholder.typicode.com/posts";
+        var target = document.getElementById("target");
+        function abc() {
+            fetch(URL)
+                .then(res => res.json())
+                .then(data => {
+                    for (i = 0; i < data.length; i++) {
+                        var obj_data = data[i]
+                        target.innerHTML += "<li type='none'>Title : " + obj_data.title+"</li>"+
+                                            "<li type='none'>Body : " + obj_data.body + "</li><hr>"
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    </script>
+</body>
+
+</html>

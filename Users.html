@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keyword" content="put imp words from ur webpage">
+    <meta name="author" content="put name of author">
+    <meta name="description" content="put short description">
+    <meta name="viewpoint" content="width=device-width,initial-scale=1">
+    <title>
+        Users
+    </title>
+    <style>
+        table,
+        th,
+        td {
+            border: 2px solid black;
+            text-align: center;
+            padding: 3px;
+        }
+        table{
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2> User Details </h2>
+    <button onclick="abc()"> Get Users </button>
+    <div>
+        <table id="target">
+            <tr>
+                <th>S.no</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Username </th>
+                <th>Phone</th>
+                <th>Website</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const URL = "https://jsonplaceholder.typicode.com/users";
+        var target = document.getElementById("target");
+        function abc() {
+            fetch(URL)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    for (i = 0; i < data.length; i++) {
+                        var obj_data = data[i]
+                        var sr_no=i+1;
+                        target.innerHTML += "<tr><td>"+sr_no+"</td><td>"+ obj_data.name +"</td><td>"+ obj_data.email +"</td><td>"+ obj_data.username +"</td><td>"+ obj_data.phone +"</td><td>"+ obj_data.website +"</td></tr>"
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    </script>
+</body>
+
+</html>

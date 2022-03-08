@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="keyword" content="put imp words from ur webpage">
+    <meta name="author" content="put name of author">
+    <meta name="description" content="put short description">
+    <meta name="viewpoint" content="width=device-width,initial-scale=1">
+    <title>
+        Slide-show
+    </title>
+    <script>
+    var arr = ["./images/img2.jpg", "./images/img3.jpg", "./images/img4.jpg", "./images/img5.jpg"];
+    var i = 0;
+    function slide() {
+        document.getElementById("abc").src = arr[i];
+        i++;
+        if (i >= arr.length) {
+            i = 0;
+        }
+    }
+    setInterval("slide()", 3000);
+</script>
+</head>
+
+<body>
+    <img id="abc" src="./images/img1.jpg" width="600" height="400" name="image" />
+</body>
+
+</html>
